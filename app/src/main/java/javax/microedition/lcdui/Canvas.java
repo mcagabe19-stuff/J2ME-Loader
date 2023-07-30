@@ -237,12 +237,7 @@ public abstract class Canvas extends Displayable {
 	}
 
 	public int getGameAction(int keyCode) {
-		int res = KeyMapper.getGameAction(keyCode);
-		if (res != Integer.MAX_VALUE) {
-			return res;
-		} else {
-			throw new IllegalArgumentException("unknown keycode " + keyCode);
-		}
+		return KeyMapper.getGameAction(keyCode);
 	}
 
 	public String getKeyName(int keyCode) {
@@ -1152,7 +1147,7 @@ public abstract class Canvas extends Displayable {
 					if (overlay != null) {
 						overlay.pointerReleased(id, x, y);
 					}
-					if (touchInput && id == 0 && virtualScreen.contains(x, y)) {
+					if (touchInput && virtualScreen.contains(x, y)) {
 						int cX = Math.round(convertPointerX(x));
 						int cY = Math.round(convertPointerY(y));
 						lastPointerPos[id][0] = cX;

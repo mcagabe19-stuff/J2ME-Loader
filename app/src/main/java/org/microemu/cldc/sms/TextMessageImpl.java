@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-package javax.microedition.shell;
+package org.microemu.cldc.sms;
 
-public class CoreClassLoader extends ClassLoader {
+import javax.wireless.messaging.TextMessage;
 
-	public CoreClassLoader(ClassLoader parent) {
-		super(parent);
+public class TextMessageImpl extends MessageImpl implements TextMessage {
+
+	private String data;
+
+	public TextMessageImpl(String address, long timestamp) {
+		super(address, timestamp);
 	}
 
 	@Override
-	protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-		if (!(name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("com.")
-				|| name.startsWith("org.xml.sax") || name.startsWith("mmpp."))) {
-			throw new ClassNotFoundException();
-		}
-		return super.loadClass(name, resolve);
+	public String getPayloadText() {
+		return data;
+	}
+
+	@Override
+	public void setPayloadText(String text) {
+		this.data = text;
 	}
 }
